@@ -54,17 +54,17 @@ Programovatelné automaty (PLC)
 
 > **Vysvětlení pojmů a odborné zdroje:**
 > - **PLC (Programmable Logic Controller):** Průmyslový mikropočítačový systém určený pro deterministické řízení technologických procesů v reálném čase. Vyznačuje se vysokou odolností proti rušení, modulární koncepcí a cyklickým vykonáváním programu.
->   Programovatelný logický automat. In: *Wikipedie: otevřená encyklopedie* [online]. San Francisco (CA): Wikimedia Foundation, 2024, 23. 2. 2024 v 09:19 [cit. 2026-09-20]. Dostupné z: https://cs.wikipedia.org/wiki/Programovateln%C3%BD_logick%C3%BD_automat
+>   Programovatelný logický automat. Dostupné z: https://cs.wikipedia.org/wiki/Programovateln%C3%BD_logick%C3%BD_automat
 > - **Embedded PLC:** Řídicí automat realizovaný jako deska plošných spojů pro přímé zabudování do stroje (OEM aplikace, např. tepelná čerpadla, kompresory) bez vnějšího krytu.
 
 > **Tip k porovnání architektur:**
-> Zatímco jednočipový mikrokontrolér (MCU) obsahuje procesor, paměti i periferie na jediném křemíkovém čipu a vyžaduje návrh desky plošných spojů, průmyslové PLC již v sobě integruje galvanické oddělení vstupů a výstupů, přepěťové ochrany, stabilizátory napětí a certifikované krytí pro montáž do elektrického rozváděče na DIN lištu.
+> **MCU** obsahuje procesor, paměti i periferie na jediném křemíkovém čipu a vyžaduje návrh desky plošných spojů, průmyslové PLC již v sobě integruje galvanické oddělení vstupů a výstupů, přepěťové ochrany, stabilizátory napětí a certifikované krytí pro montáž do elektrického rozváděče na DIN lištu.
 
 **Bonusová otázka k úloze 1:**
 Proč programátor v prostředí pro PLC (např. Teco Mosaic) nesmí ve standardní programové smyčci použít nekonečný blokující cyklus (nekonečná smyčka/infinite loop, např. `WHILE True DO ...`), se kterým se lze setkat u programování desktopových aplikací na PC a programování MCU? Jaký interní bezpečnostní mechanismus procesoru PLC by v takovém případě zasáhl?
 
 *Vaše odpověď:*
-V PLC běží uživatelský program cyklicky (tzv. PLC cyklus se skládá z načtení vstupů, zpracování programu a zápisu výstupů). Pokud by program uvíznul v nekonečné smyčce, procesor by se z ní nevrátil, což by zcela zablokovalo aktualizaci I/O, komunikaci i obsluhu systému. V takovém případě zasáhne interní bezpečnostní mechanismus zvaný **Watchdog** – jde o hardwarový nebo softwarový časovač, který sleduje dobu trvání jednoho cyklu. Pokud cyklus přesáhne přednastavený limit, watchdog vyvolá chybu, nouzově odpojí výstupy (přepne PLC do chybového režimu / stop stavu) a zabrání tak havárii řízené technologie.
+V PLC běží uživatelský program cyklicky (tzv. PLC cyklus se skládá z načtení vstupů, zpracování programu a zápisu výstupů). Pokud by program uvíznul v nekonečné smyčce, procesor by se z ní nevrátil, což by zcela zablokovalo aktualizaci I/O, komunikaci i obsluhu systému. V takovém případě zasáhne interní bezpečnostní mechanismus zvaný **Watchdog** – hardwarový nebo softwarový časovač, který sleduje dobu trvání jednoho cyklu. Pokud cyklus přesáhne přednastavený limit, watchdog vyvolá chybu, nouzově odpojí výstupy (přepne PLC do chybového režimu / stop stavu), zabrání tak havárii řízené technologie.
 
 ---
 
